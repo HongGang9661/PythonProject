@@ -1,3 +1,8 @@
+"""
+对于.ini类型的配置文件，使用configparser模块获取、修改内容
+"""
+
+
 import configparser
 
 # 创建管理对象
