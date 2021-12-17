@@ -1,6 +1,6 @@
 import os
 
-os.access(path="", mode=(os.F_OK,os.W_OK,))
+os.access(path="", mode=os.F_OK)
 """
 os.access(path, mode);
 参数
@@ -19,7 +19,7 @@ os.chdir(path="")
 os.getcwd()
 
 # 更改文件权限
-os.chmod(path="", mode= "")
+os.chmod(path="", mode="")
 
 # 返回path指定的文件夹包含的文件或文件夹的名字的列表。
 os.listdir(path="")
@@ -48,3 +48,11 @@ os.name
 
 # 用于创建一个指定文件名
 os.mknod(path="")
+
+# 目录结构
+os.path.dirname("")  # 去掉文件名返回目录
+os.path.basename("")  # 去掉目录返回文件名
+os.path.dirname(__file__)  # __file__表示当前文件的路径
+os.path.realpath(path="")  # 获取当前执行脚本的绝对路径，可使用内置函数__file__获取当前文件的路径，可以和os.path.dirname()组合使用
+os.path.join("path1", "path2")  # 把目录和文件名合成一个路径
+os.path.split("path")  # 把路径分割成 dirname 和 basename，返回一个元组
