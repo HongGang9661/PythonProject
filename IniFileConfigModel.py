@@ -21,7 +21,7 @@ config.get(section="", option="")
 
 # 判断section、option是否存在
 config.has_section("")
-config.has_option(section="")
+config.has_option(section="", option='')
 
 # 移除section、option
 config.remove_section(section="")
