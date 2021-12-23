@@ -32,4 +32,4 @@ Excel_sheet.cell(1, 1).value   # 获取某个单元格值
 Excel_sheet.delete_rows(1)   # 删除行
 Excel_sheet.delete_cols(1)   # 删除列
 Excel_sheet.merge_cells('A1:B1')   # 合并单元格
-Excel_sheet.merge_cells()
+Excel_sheet.merge_cells(start_row='1', end_row='3', start_column='1', end_column='3')   # 合并单元格
