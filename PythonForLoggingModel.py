@@ -1,4 +1,12 @@
-""""记录对logging模块的使用，掌握日志纪律"""
+""""
+记录对logging模块的使用，掌握日志记录
+Logger 暴露了应用程序代码能直接使用的接口。
+Handler将（记录器产生的）日志记录发送至合适的目的地。
+Filter提供了更好的粒度控制，它可以决定输出哪些日志记录。　　　
+Formatter 指明了最终输出中日志记录的布局
+
+CSDN：https://blog.csdn.net/weixin_30338743/article/details/99422394?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_title~default-1.highlightwordscore&spm=1001.2101.3001.4242.2
+"""
 
 import logging
 
