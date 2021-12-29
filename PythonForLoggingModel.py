@@ -9,31 +9,44 @@ CSDN：https://blog.csdn.net/weixin_30338743/article/details/99422394?utm_medium
 """
 
 import logging
+import time
 
-# 创建日志记录器
-logger = logging.getLogger()
-logger.setLevel(logging.DEBUG)
 
-# 创建日志处理器Handler，用于写入日志文件
-logfile = 'log.txt'
-log_handler_file = logging.FileHandler(logfile, mode='a', encoding='utf-8')
-log_handler_file.setLevel(logging.INFO)
+class LoggerModel:
+    def __init__(self):
+        # 创建日志记录器
+        self.logger = logging.getLogger('logger')
 
-# 定义Handler输出格式
-format_log = logging.Formatter('%(asctime)s %(filename)s[line:%(lineno)d] %(levelname)s %(message)s')
-log_handler_file.setFormatter(format_log)
+    def get_log(self):
+        # 设置日志器级别
+        self.logger.setLevel(logging.DEBUG)
+        # 定义Handler输出格式
+        format_log = logging.Formatter('%(asctime)s %(filename)s[line:%(lineno)d] %(levelname)s %(message)s')
 
-# 将Handler添加到日志记录器
-logger.addHandler(log_handler_file)
+        # 如果没有处理器时，创建日志处理器，否则不创建
+        if not self.logger.handlers:
+            # 创建日志处理器Handler，用于写入日志文件
+            logfile = '{}.txt'.format(time.strftime('%Y-%m-%d %H-%M-%S', time.localtime()))
+            fh = logging.FileHandler(logfile, mode='a', encoding='utf-8')
+            fh.setLevel(logging.INFO)
+            # 设置Handler输出格式
+            fh.setFormatter(format_log)
+            # 将Handler添加到日志记录器
+            self.logger.addHandler(fh)
 
-# 创建一个Handler用于控制台输出日志
-log_handler_stream = logging.StreamHandler()
-log_handler_stream.setLevel(logging.INFO)
-log_handler_stream.setFormatter(format_log)
-logger.addHandler(log_handler_stream)
+            # 创建一个Handler用于控制台输出日志
+            sh = logging.StreamHandler()
+            sh.setLevel(logging.INFO)
+            sh.setFormatter(format_log)
+            self.logger.addHandler(sh)
 
-logger.debug('这是一个debug的日志！')
-logger.info('这是一个info的日志！')
-logger.warning('这是一个warning的日志！')
-logger.error('这是一个error的日志！')
-logger.critical('这是一个critical的日志！')
+        return self.logger
+
+
+if __name__ == '__main__':
+    log = LoggerModel().get_log()
+    log.debug('这是一个debug的日志！')
+    log.info('这是一个info的日志！')
+    log.warning('这是一个warning的日志！')
+    log.error('这是一个error的日志！')
+    log.critical('这是一个critical的日志！')
