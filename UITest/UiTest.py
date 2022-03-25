@@ -66,7 +66,9 @@ try:
     WebDriverWait(driver=driver, timeout=10, poll_frequency=0.5, ignored_exceptions=None).until(lambda driver: driver.find_element(By.ID, 'kw'))
 
     """元素组"""
-    driver.find_elements(By.TAG_NAME, '')
+    elements = driver.find_elements(By.TAG_NAME, '')
+    for element in elements:
+        element.click()
 
 
 except selenium.common.exceptions.NoSuchElementException as e:
