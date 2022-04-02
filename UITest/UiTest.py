@@ -5,6 +5,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions
 import time
 
 driver = webdriver.Chrome()
@@ -70,6 +71,24 @@ try:
     for element in elements:
         element.click()
 
+    """切换frame:可以传入id、name、index以及selenium的WebElement对象"""
+    driver.switch_to.frame(frame_reference='')
+
+    """多窗口处理"""
+    driver.current_window_handle  # 获取当前窗口
+    handles = driver.window_handles  # 获取所有窗口
+    driver.switch_to.window(handles[0])  # 打开第一个窗口，-1打开最新的窗口
+    driver.close()  # 关闭当前窗口
+
+    """alert/confirm/prompy处理"""
+    # 等待弹窗出现，然后切换
+    WebDriverWait(driver, 10).until(expected_conditions.alert_is_present())
+    alert = driver.switch_to.alert
+
+    alert.text  # 获取弹窗文本内容
+    alert.accept()  # 点击确认按钮
+    alert.dismiss()  # 点击取消按钮
+    alert.send_keys()
 
 except selenium.common.exceptions.NoSuchElementException as e:
     print("元素有异常：", e.msg)
@@ -80,4 +99,4 @@ except:
 finally:
     time.sleep(5)
     print('即将关闭浏览器！')
-    driver.quit()
+    driver.quit()  # 退出驱动程序并关闭所有窗口
